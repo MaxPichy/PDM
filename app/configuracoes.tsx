@@ -1,14 +1,14 @@
+import Botao from '@/components/Botao';
 import { router } from 'expo-router';
 import { Text, View } from 'react-native';
 import { styles } from './styles';
-import Botao from '@/components/Botao';
 
-export default function Tarefas() {
+export default function Configuracoes() {
   return (
     <View style={styles.container}>
-      <Text>Minhas Tarefas</Text>
+      <Text>Minhas Configurações</Text>
       <Botao texto="Voltar" onPress={router.back}></Botao>
-      <Botao texto="Configurações" onPress={() => router.push('../configuracoes')}></Botao>
+      <Botao texto="Tarefas" onPress={() => router.push('../tarefas')}></Botao>
     </View>
   );
 }

@@ -1,8 +1,11 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from './styles';
+import Botao from '@/components/Botao';
+import Titulo from '@/components/Titulo';
+//import Caixa from '@/components/Caixa';
 
 export default function Home() {
   const [iniciado, setIniciado] = useState(false);
@@ -27,11 +30,8 @@ export default function Home() {
             style={styles.logo}
             resizeMode="contain"
           />
-          {iniciado ? (
-            <Text style={styles.titulo}>Tarefas</Text>
-          ) : (
-            <Text style={styles.titulo}>TaskFlow</Text>
-          )}
+
+          <Titulo texto={iniciado ? ('Tarefas') : ('TaskFlow')}/>      
 
           {iniciado ? (
             <Text style={styles.descricao}>Bem vindo as TaskFlow!</Text>
@@ -41,17 +41,11 @@ export default function Home() {
             </Text>
           )}
 
-          <Pressable
-            onPress={iniciarAplicacao}
-            style={({ pressed }) => [
-              styles.botao,
-              pressed && styles.botaoPressionado,
-            ]}
+          <Botao
+            texto={iniciado ? 'Continuar' : 'Começar'}
+            onPress={()=>{}}
           >
-            <Text style={styles.textoBotao}>
-              {iniciado ? 'Continuar' : 'Começar'}
-            </Text>
-          </Pressable>
+          </Botao>
           {/* <Pressable
                     style={styles.botao}
                     onPress={encerrarAplicacao}
@@ -72,6 +66,20 @@ export default function Home() {
                         {modo === "concluido" ? (
                             <Text>App Encerrado.</Text>
                         ):('')} */}
+          <Botao
+            texto='Tarefas'
+            onPress={iniciarAplicacao}
+          /> 
+
+          {/* <Caixa>
+            <Text>Texto dentro da caixa</Text>
+            <Botao
+              texto='CAIXA'
+              onPress={()=>{}}
+            />
+
+          </Caixa> */}
+        
         </View>
       </View>
     </SafeAreaView>

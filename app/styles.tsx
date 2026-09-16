@@ -34,21 +34,21 @@ export const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 20,
     alignItems: 'center',
-  },
-  botao: {
-    backgroundColor: '#2563EB',
-    paddingVertical: 15,
-    paddingHorizontal: 40,
-    borderRadius: 10,
-  },
-  textoBotao: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  botaoPressionado: {
-    backgroundColor: '#173c8dff',
-    color: '#9f9f9fff',
-    transform: 'scale(1.2)',
-  },
+  }
+  // botao: {
+  //   backgroundColor: '#2563EB',
+  //   paddingVertical: 15,
+  //   paddingHorizontal: 40,
+  //   borderRadius: 10,
+  // },
+  // textoBotao: {
+  //   color: '#fff',
+  //   fontWeight: 'bold',
+  //   fontSize: 18,
+  // }
+  // botaoPressionado: {
+  //   backgroundColor: '#173c8dff',
+  //   color: '#9f9f9fff',
+  //   transform: 'scale(1.2)',
+  // }
 });

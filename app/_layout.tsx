@@ -6,6 +6,8 @@ export default function Layout() {
       <Stack.Screen name="index" options={{ title: 'Home' }} />
 
       <Stack.Screen name="tarefas" options={{ title: 'Minhas Tarefas' }} />
+
+      <Stack.Screen name="configuracoes" options={{ title: 'Minhas Configurações' }} />
     </Stack>
   );
 }
