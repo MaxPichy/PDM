@@ -1,5 +1,4 @@
-import { StyleSheet } from 'react-native';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 interface CaixaProps{
     children: React.ReactNode
