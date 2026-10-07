@@ -1,50 +1,50 @@
-import { Image, Text, View } from 'react-native';
-import { useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from './styles';
-import { router } from 'expo-router';
 import Botao from '@/components/Botao';
-import Titulo from '@/components/Titulo';
 import Card from '@/components/Card';
+import Titulo from '@/components/Titulo';
+import { styles } from '@/globals/styles';
+import { router } from 'expo-router';
+import { useState } from 'react';
+import { Image, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Home() {
-    const [iniciado, setIniciado] = useState(false)
+  const [iniciado, setIniciado] = useState(false);
 
-    function iniciarAplicacao() {
-        setIniciado(true);
-        router.push("/tarefas");
-    }
-    return (
-        <SafeAreaView style={styles.safeArea}>
-            <View style={styles.container}>
-                <Card>
-                    <Image
-                        source={require("../assets/images/logo.png")}
-                        style={styles.logo}
-                        resizeMode='contain'
-                    />
-                    
-                    <Titulo texto='TaskFlow'/>
+  function iniciarAplicacao() {
+    setIniciado(true);
+    router.push('/tarefas/tarefas');
+  }
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <Card>
+          <Image
+            source={require('../assets/images/logo.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
 
-                    {iniciado ? (
-                        <Text style={styles.descricao}>
-                            Bem vindo as TaskFlow!
-                        </Text>
-                    ) : (
-                        <Text style={styles.descricao}>
-                            Organize sua tarefas de forma simples
-                        </Text>
-                    )}
-                    
+          <Titulo texto="TaskFlow" />
 
-                    <Botao
-                        texto={iniciado ? "Continuar" : "Começar"}
-                        onPress={iniciarAplicacao}
-                    />
-                    
+          {iniciado ? (
+            <Text style={styles.descricao}>Bem vindo as TaskFlow!</Text>
+          ) : (
+            <Text style={styles.descricao}>
+              Organize sua tarefas de forma simples
+            </Text>
+          )}
 
-                </Card>
-            </View>
-        </SafeAreaView>
-    );
+          <Botao
+            texto={iniciado ? 'Continuar' : 'Começar'}
+            onPress={iniciarAplicacao}
+          />
+
+          <Botao
+            texto="Exercícios"
+            onPress={() => router.push('/atividades/atividades')}
+          />
+        </Card>
+      </View>
+    </SafeAreaView>
+  );
 }

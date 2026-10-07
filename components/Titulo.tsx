@@ -1,20 +1,18 @@
-import { Text,StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
-interface TituloProps{
-    texto: string
+interface TituloProps {
+  texto: string;
 }
 
-export default function Titulo({texto}:TituloProps){
-    return(
-        <Text style={style.titulo}>{texto}</Text>
-    );
+export default function Titulo({ texto }: TituloProps) {
+  return <Text style={style.titulo}>{texto}</Text>;
 }
 
 const style = StyleSheet.create({
-    titulo:{
-        fontSize: 34,
-        fontWeight: 'bold',
-        color: '#2c61b6ff',
-        marginBottom: 10
-    }
+  titulo: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    color: '#2c61b6ff',
+    marginBottom: 10,
+  },
 });

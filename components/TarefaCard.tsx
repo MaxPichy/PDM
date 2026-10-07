@@ -12,7 +12,7 @@ export default function TarefaCard({titulo, descricao, prioridade}: TCProps){
         <View style={[
             styles.tarefa,
             prioridade === "Alta" && { borderLeftColor: 'red' },
-            prioridade === "Média" && { borderLeftColor: 'yellow' }
+            prioridade === "Media" && { borderLeftColor: 'yellow' }
             ]}>
             <Text style={styles.titulo}>{titulo}</Text>
             <Text style={styles.descricao}>{descricao}</Text>
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#cacacaff',
         borderRadius: 8,
         padding: 15,
-        borderLeftWidth: 4
+        borderLeftWidth: 4,
+        margin: 5,
     },
     titulo:{
         fontSize: 20,
@@ -36,4 +37,4 @@ const styles = StyleSheet.create({
     descricao:{
         fontSize: 13
     }
-});
+})
