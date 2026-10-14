@@ -1,4 +1,5 @@
 import Botao from '@/components/Botao';
+import { criarTarefas } from '@/services/tarefas';
 import { carregarTarefas, salvarTarefas } from '@/utils/armazenamento';
 import { Picker } from '@react-native-picker/picker';
 import { router } from 'expo-router';
@@ -24,17 +25,13 @@ export default function AddTarefas() {
     }
 
     const novaTarefa = {
-      id: Date.now().toString(),
       titulo: titulo.trim(),
       descricao: descricao.trim(),
       prioridade: prioridade.trim(),
+      concluida: false
     };
 
-    const tarefas = await carregarTarefas();
-
-    const novaLista = [...tarefas, novaTarefa];
-
-    await salvarTarefas(novaLista);
+    await criarTarefas(novaTarefa);
 
     Alert.alert('Sucesso!', 'Validação ok, dados salvos com sucesso!');
     router.replace('/tarefas/tarefas');
