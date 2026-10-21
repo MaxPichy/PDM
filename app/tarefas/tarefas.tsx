@@ -1,5 +1,5 @@
+import {listarTarefas, atualizarTarefa, excluirTarefa} from '@/services/tarefas';
 import { FlatList, Text, View, Alert, ActivityIndicator } from 'react-native';
-import { excluirTarefa, listarTarefas } from '@/services/tarefas';
 import { carregarUsuario } from '@/utils/armazenamento';
 import TarefaCard from '@/components/TarefaCard';
 import { useEffect, useState } from 'react';
@@ -25,44 +25,40 @@ export default function Tarefas() {
   const [carregando, setCarrengando] = useState(true);
   const [erro, setErro] = useState(false);
 
-  async function excluirTarefa(_id: string){
-    Alert.alert(
-          'EXCLUIR TAREFA', 
-          'Tem certeza que deseja excluir a tarefa?',
-          [
-              {
-                  text: 'Cancelar',
-                  style: 'cancel'
-              },
-              {
-                  text: 'Excluir',
-                  style: 'destructive',
-                  onPress: async () => {
-                    try{
-                      await excluirTarefa(_id);
-  
-                      const tarefasAtualizadas = await listarTarefas();
-                      setTarefas(tarefasAtualizadas);
-                    } catch(error){
-                      console.log(error);
-                      Alert.alert('Erro', 'Não foi possível excluir a tarefa!')
-                    }
-                  }
-              }
-          ]
-      );
+  async function excluirTarefa(_id: string) {
+    Alert.alert('EXCLUIR TAREFA', 'Tem certeza que deseja excluir a tarefa?', [
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+      {
+        text: 'Excluir',
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            await excluirTarefa(_id);
+
+            const tarefasAtualizadas = await listarTarefas();
+            setTarefas(tarefasAtualizadas);
+          } catch (error: any) {
+            Alert.alert('Erro', 'Não foi possível excluir a tarefa!');
+            console.log(error);
+          }
+        },
+      },
+    ]);
   }
 
   useEffect(() => {
     async function carregar() {
-      try{
+      try {
         const dados = await listarTarefas();
         setTarefas(dados);
-      }catch(error){
+      } catch (error) {
         console.log('Falha ao biscar as tarefas', error);
-        Alert.alert('Erro', 'Não foi possível listar as tarefas')
+        Alert.alert('Erro', 'Não foi possível listar as tarefas');
         setErro(true);
-      } finally{
+      } finally {
         setCarrengando(false);
       }
 
@@ -72,17 +68,17 @@ export default function Tarefas() {
     carregar();
   }, []);
 
-  if(carregando){
-    return(
-      <View style={{flex: 1, justifyContent: 'center'}}>
+  if (carregando) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center' }}>
         <ActivityIndicator size={50} />
       </View>
     );
   }
 
-  if(erro){
-    return(
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+  if (erro) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Erro ao buscar tarefas</Text>
       </View>
     );
@@ -106,6 +102,14 @@ export default function Tarefas() {
               descricao={item.descricao}
               prioridade={item.prioridade}
               excluir={() => excluirTarefa(item._id)}
+              atualizar={() =>
+                atualizarTarefa(
+                  router.push({
+                    pathname: '/tarefas/addTarefas',
+                    params: { id: item._id },
+                  }),
+                )
+              }
             />
           </>
         )}

@@ -7,9 +7,10 @@ interface TCProps{
     prioridade: string;
     concluida?: boolean;
     excluir?: () => void;
+    atualizar?: () => void;
 }
 
-export default function TarefaCard({titulo, descricao, prioridade, concluida, excluir}: TCProps){
+export default function TarefaCard({titulo, descricao, prioridade, concluida, excluir, atualizar}: TCProps){
 
     return(
         <View style={[
@@ -19,14 +20,16 @@ export default function TarefaCard({titulo, descricao, prioridade, concluida, ex
             prioridade === "Baixa" && { borderLeftColor: '#13c11fff' }
             ]}>
 
-            <View style={{alignSelf: 'flex-end'}}>
-                <Pressable onPress={excluir}>
-                    <Ionicons name='trash-outline' size={20} color='red'/>
-                </Pressable>
-            </View>
+            <Pressable onPress={atualizar}>
+                <View style={{alignSelf: 'flex-end'}}>
+                    <Pressable onPress={excluir}>
+                        <Ionicons name='trash-outline' size={20} color='red'/>
+                    </Pressable>
+                </View>
 
-            <Text style={styles.titulo}>{titulo}</Text>
-            <Text style={styles.descricao}>{descricao}</Text>
+                <Text style={styles.titulo}>{titulo}</Text>
+                <Text style={styles.descricao}>{descricao}</Text>
+            </Pressable>
         </View>
     );
 }

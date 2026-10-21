@@ -1,15 +1,33 @@
-import Botao from '@/components/Botao';
-import { criarTarefas } from '@/services/tarefas';
-import { carregarTarefas, salvarTarefas } from '@/utils/armazenamento';
-import { Picker } from '@react-native-picker/picker';
-import { router } from 'expo-router';
-import { useState } from 'react';
+import { buscarTarefa, criarTarefa, atualizarTarefa } from '@/services/tarefas';
 import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
+import { router, useLocalSearchParams } from 'expo-router';
+import { Picker } from '@react-native-picker/picker';
+import { useState, useEffect } from 'react';
+import Botao from '@/components/Botao';
 
 export default function AddTarefas() {
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
   const [prioridade, setPrioridade] = useState('');
+
+  const {id} = useLocalSearchParams<{id?: string}>();
+
+  useEffect(() => {
+    if(!id) return;
+
+    async function carregar(){
+      try{
+        const dados = await buscarTarefa(id)
+
+        setTitulo(dados.titulo)
+        setDescricao(dados.descricao)
+        setPrioridade(dados.prioridade)
+      } catch(error){
+        console.log('Erro ao buscar a tarefa', error)
+      }
+    }
+   carregar()
+  }, [id]);
 
   async function salvar() {
     if (titulo.trim() === '') {
@@ -31,7 +49,13 @@ export default function AddTarefas() {
       concluida: false
     };
 
-    await criarTarefas(novaTarefa);
+    if(!id){
+      await criarTarefa(novaTarefa);
+    } else{
+      await atualizarTarefa(id, novaTarefa);
+    }
+
+    await criarTarefa(novaTarefa);
 
     Alert.alert('Sucesso!', 'Validação ok, dados salvos com sucesso!');
     router.replace('/tarefas/tarefas');
@@ -39,6 +63,7 @@ export default function AddTarefas() {
 
   return (
     <View style={styles.container}>
+      <Text>{id? id : 'ID não localizado.'}</Text>
       <Text style={styles.label}>Título *</Text>
       <TextInput
         value={titulo}
@@ -73,7 +98,7 @@ export default function AddTarefas() {
       </View>
 
       <View style={{ alignSelf: 'flex-end' }}>
-        <Botao texto="Salvar" onPress={salvar} />
+        <Botao texto={id? 'Atualizar' : 'Salvar'} onPress={salvar} />
       </View>
     </View>
   );
