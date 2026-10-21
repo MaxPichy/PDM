@@ -15,6 +15,10 @@ const exercicios = [
     nome: 'Ex axios',
     rota: '/atividades/ex_axios',
   },
+  {
+    nome: 'Seleção de Imagens',
+    rota: '/atividades/libraryImage'
+  }
 ] as const;
 
 export default function Atividades() {
