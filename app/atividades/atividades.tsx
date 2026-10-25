@@ -18,6 +18,10 @@ const exercicios = [
   {
     nome: 'Seleção de Imagens',
     rota: '/atividades/libraryImage'
+  },
+  {
+    nome: 'Reposição 19/10/2026',
+    rota: '/atividades/reposicao'
   }
 ] as const;
 
