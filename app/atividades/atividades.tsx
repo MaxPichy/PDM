@@ -17,12 +17,21 @@ const exercicios = [
   },
   {
     nome: 'Seleção de Imagens',
+<<<<<<< HEAD
     rota: '/atividades/libraryImage',
   },
   {
     nome: 'Aula SQLite',
     rota: '/atividades/aula_sqlite',
   },
+=======
+    rota: '/atividades/libraryImage'
+  },
+  {
+    nome: 'Reposição 19/10/2026',
+    rota: '/atividades/reposicao'
+  }
+>>>>>>> 37b9bf1abd1eaac6e9692884580f9a1cd8f17966
 ] as const;
 
 export default function Atividades() {
