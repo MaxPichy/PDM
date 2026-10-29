@@ -17,8 +17,12 @@ const exercicios = [
   },
   {
     nome: 'Seleção de Imagens',
-    rota: '/atividades/libraryImage'
-  }
+    rota: '/atividades/libraryImage',
+  },
+  {
+    nome: 'Aula SQLite',
+    rota: '/atividades/aula_sqlite',
+  },
 ] as const;
 
 export default function Atividades() {

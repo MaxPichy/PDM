@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://68.211.112.101:3000/',
-    timeout: 10000,
-    headers: {
-        'Content-Type': 'application/json'
-    }
+  baseURL: 'http://68.211.112.101:3000/',
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 export default api;

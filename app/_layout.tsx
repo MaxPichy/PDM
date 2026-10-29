@@ -1,19 +1,33 @@
 import { Stack } from 'expo-router';
+import { SQLiteProvider } from 'expo-sqlite';
 
 export default function Layout() {
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ title: 'TaskFlow' }} />
+    <SQLiteProvider 
+      databaseName='taskflow.db'
+      onInit={async (db) => {
+        await db.execAsync(`
+          CREATE TABLE IF NOT EXISTS tarefas(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            titulo TEXT NOT NULL,
+            concluida INTEGER NOT NULL DEFAULT 0
+          );
+        `)
+      }}
+    >
+      <Stack>
+        <Stack.Screen name="index" options={{ title: 'TaskFlow' }} />
 
-      <Stack.Screen
-        name="tarefas/tarefas"
-        options={{ title: 'Minhas Tarefas' }}
-      />
+        <Stack.Screen
+          name="tarefas/tarefas"
+          options={{ title: 'Minhas Tarefas' }}
+        />
 
-      <Stack.Screen
-        name="tarefas/addTarefas"
-        options={{ title: 'Adicionar Tarefas' }}
-      />
-    </Stack>
+        <Stack.Screen
+          name="tarefas/addTarefas"
+          options={{ title: 'Adicionar Tarefas' }}
+        />
+      </Stack>
+    </SQLiteProvider>
   );
 }
